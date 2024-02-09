@@ -79,7 +79,7 @@ public class Xrb28ProtocolDecoder extends BaseProtocolDecoder {
                 channel.write(new NetworkMessage(
                         "\u00ff\u00ff*SCOS" + sentence.substring(5, 27) + "#\n",
                         remoteAddress));
-            } else if (type.equals("R0") && pendingCommand != null) {
+            } else if ("R0".equals(type) && pendingCommand != null) {
                 String command = pendingCommand.equals(Command.TYPE_ALARM_ARM) ? "L1," : "L0,";
                 channel.write(new NetworkMessage(
                         "\u00ff\u00ff*SCOS" + sentence.substring(5, 25) + command + sentence.substring(30) + "\n",
@@ -167,7 +167,7 @@ public class Xrb28ProtocolDecoder extends BaseProtocolDecoder {
             DateBuilder dateBuilder = new DateBuilder()
                     .setTime(parser.nextInt(), parser.nextInt(), parser.nextInt());
 
-            position.setValid(parser.next().equals("A"));
+            position.setValid("A".equals(parser.next()));
             position.setLatitude(parser.nextCoordinate());
             position.setLongitude(parser.nextCoordinate());
 

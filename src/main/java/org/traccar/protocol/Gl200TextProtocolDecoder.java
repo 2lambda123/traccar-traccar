@@ -78,7 +78,7 @@ public class Gl200TextProtocolDecoder extends BaseProtocolDecoder {
             if (deviceSession == null) {
                 return null;
             }
-            if (type.equals("HBD")) {
+            if ("HBD".equals(type)) {
                 if (channel != null) {
                     parser.skip(6);
                     channel.writeAndFlush(new NetworkMessage(
@@ -1356,15 +1356,15 @@ public class Gl200TextProtocolDecoder extends BaseProtocolDecoder {
         }
 
         int reportType = parser.nextHexInt();
-        if (type.equals("NMR")) {
+        if ("NMR".equals(type)) {
             position.set(Position.KEY_MOTION, reportType == 1);
-        } else if (type.equals("SOS")) {
+        } else if ("SOS".equals(type)) {
             position.set(Position.KEY_ALARM, Position.ALARM_SOS);
-        } else if (type.equals("DIS")) {
+        } else if ("DIS".equals(type)) {
             position.set(Position.PREFIX_IN + reportType / 0x10, reportType % 0x10 == 1);
-        } else if (type.equals("IGL")) {
+        } else if ("IGL".equals(type)) {
             position.set(Position.KEY_IGNITION, reportType % 0x10 == 1);
-        } else if (type.equals("HBM")) {
+        } else if ("HBM".equals(type)) {
             switch (reportType % 0x10) {
                 case 0:
                 case 3:

@@ -67,7 +67,7 @@ public class WatchProtocolEncoder extends StringProtocolEncoder implements Strin
             if (decoder != null) {
                 hasIndex = decoder.getHasIndex();
                 manufacturer = decoder.getManufacturer();
-                if (manufacturer.equals("3G")) {
+                if ("3G".equals(manufacturer)) {
                     manufacturer = "SG";
                 }
             }

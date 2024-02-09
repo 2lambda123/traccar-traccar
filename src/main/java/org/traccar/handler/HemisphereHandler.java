@@ -35,17 +35,17 @@ public class HemisphereHandler extends BaseDataHandler {
     public HemisphereHandler(Config config) {
         String latitudeHemisphere = config.getString(Keys.LOCATION_LATITUDE_HEMISPHERE);
         if (latitudeHemisphere != null) {
-            if (latitudeHemisphere.equalsIgnoreCase("N")) {
+            if ("N".equalsIgnoreCase(latitudeHemisphere)) {
                 latitudeFactor = 1;
-            } else if (latitudeHemisphere.equalsIgnoreCase("S")) {
+            } else if ("S".equalsIgnoreCase(latitudeHemisphere)) {
                 latitudeFactor = -1;
             }
         }
         String longitudeHemisphere = config.getString(Keys.LOCATION_LONGITUDE_HEMISPHERE);
         if (longitudeHemisphere != null) {
-            if (longitudeHemisphere.equalsIgnoreCase("E")) {
+            if ("E".equalsIgnoreCase(longitudeHemisphere)) {
                 longitudeFactor = 1;
-            } else if (longitudeHemisphere.equalsIgnoreCase("W")) {
+            } else if ("W".equalsIgnoreCase(longitudeHemisphere)) {
                 longitudeFactor = -1;
             }
         }

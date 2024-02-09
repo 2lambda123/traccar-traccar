@@ -154,7 +154,7 @@ public class AquilaProtocolDecoder extends BaseProtocolDecoder {
 
         position.setTime(parser.nextDateTime());
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         if (parser.hasNext(3)) {
             position.set(Position.KEY_RSSI, parser.nextInt(0));
@@ -166,7 +166,7 @@ public class AquilaProtocolDecoder extends BaseProtocolDecoder {
 
             position.set(Position.KEY_FUEL_LEVEL, parser.nextInt());
             position.set(Position.PREFIX_IN + 1, parser.next());
-            position.set(Position.KEY_CHARGE, parser.next().equals("1"));
+            position.set(Position.KEY_CHARGE, "1".equals(parser.next()));
             position.set(Position.PREFIX_IN + 2, parser.next());
 
             position.set(Position.KEY_IGNITION, parser.nextInt(0) == 1);
@@ -181,7 +181,7 @@ public class AquilaProtocolDecoder extends BaseProtocolDecoder {
 
             position.setCourse(parser.nextInt(0));
 
-            position.set(Position.KEY_CHARGE, parser.next().equals("1"));
+            position.set(Position.KEY_CHARGE, "1".equals(parser.next()));
             position.set(Position.KEY_IGNITION, parser.nextInt(0) == 1);
             position.set(Position.KEY_POWER, parser.nextInt(0));
             position.set(Position.KEY_BATTERY, parser.nextInt(0));
@@ -200,7 +200,7 @@ public class AquilaProtocolDecoder extends BaseProtocolDecoder {
             position.set(Position.KEY_HDOP, parser.nextDouble(0));
             position.set(Position.PREFIX_ADC + 1, parser.nextInt(0));
             position.set(Position.PREFIX_IN + 1, parser.nextInt(0));
-            position.set(Position.KEY_CHARGE, parser.next().equals("1"));
+            position.set(Position.KEY_CHARGE, "1".equals(parser.next()));
             position.set(Position.PREFIX_IN + 2, parser.nextInt(0));
             position.set(Position.KEY_IGNITION, parser.nextInt(0) == 1);
             position.set(Position.KEY_POWER, parser.nextInt(0));

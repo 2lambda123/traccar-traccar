@@ -78,7 +78,7 @@ public class TlvProtocolDecoder extends BaseProtocolDecoder {
             }
         }
 
-        if (type.equals("0E")) {
+        if ("0E".equals(type)) {
 
             DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, readArgument(buf));
             if (deviceSession == null) {

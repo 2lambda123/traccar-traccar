@@ -74,7 +74,7 @@ public class T57ProtocolDecoder extends BaseProtocolDecoder {
         position.setSpeed(parser.nextDouble());
         position.setAltitude(parser.nextDouble());
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         position.set(Position.KEY_BATTERY, parser.nextDouble());
 

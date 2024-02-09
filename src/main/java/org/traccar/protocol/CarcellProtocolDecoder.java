@@ -87,7 +87,7 @@ public class CarcellProtocolDecoder extends BaseProtocolDecoder {
         }
 
         Position position = new Position(getProtocolName());
-        position.set(Position.KEY_ARCHIVE, parser.next().equals("%"));
+        position.set(Position.KEY_ARCHIVE, "%".equals(parser.next()));
         position.setValid(true);
 
         DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());
@@ -122,26 +122,26 @@ public class CarcellProtocolDecoder extends BaseProtocolDecoder {
         Double internalBattery = (parser.nextDouble(0) + 100d) * 0.0294d;
         position.set(Position.KEY_BATTERY, internalBattery);
         position.set(Position.KEY_RSSI, parser.nextInt(0));
-        position.set("jamming", parser.next().equals("1"));
+        position.set("jamming", "1".equals(parser.next()));
         position.set(Position.KEY_GPS, parser.nextInt(0));
 
         position.set("clockType", parser.next());
 
         position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));
 
-        position.set("blocked", parser.next().equals("1"));
-        position.set(Position.KEY_IGNITION, parser.next().equals("1"));
+        position.set("blocked", "1".equals(parser.next()));
+        position.set(Position.KEY_IGNITION, "1".equals(parser.next()));
 
         if (parser.hasNext(4)) {
-            position.set("cloned", parser.next().equals("1"));
+            position.set("cloned", "1".equals(parser.next()));
 
             parser.next(); // panic button status
 
             String painelStatus = parser.next();
-            if (painelStatus.equals("1")) {
+            if ("1".equals(painelStatus)) {
                 position.set(Position.KEY_ALARM, Position.ALARM_GENERAL);
             }
-            position.set("painel", painelStatus.equals("2"));
+            position.set("painel", "2".equals(painelStatus));
 
             Double mainVoltage = parser.nextDouble(0) / 100d;
             position.set(Position.KEY_POWER, mainVoltage);

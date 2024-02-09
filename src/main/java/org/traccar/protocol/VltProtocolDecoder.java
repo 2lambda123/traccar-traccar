@@ -73,7 +73,7 @@ public class VltProtocolDecoder extends BaseHttpProtocolDecoder {
         position.setDeviceId(deviceSession.getDeviceId());
 
         position.set(Position.KEY_EVENT, parser.nextInt());
-        position.set(Position.KEY_ARCHIVE, parser.next().equals("H") ? true : null);
+        position.set(Position.KEY_ARCHIVE, "H".equals(parser.next()) ? true : null);
 
         position.setValid(parser.nextInt() > 0);
         position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));
@@ -95,7 +95,7 @@ public class VltProtocolDecoder extends BaseHttpProtocolDecoder {
 
         position.set(Position.KEY_IGNITION, parser.nextInt() > 0);
         position.set(Position.KEY_CHARGE, parser.nextInt() > 0);
-        position.set(Position.KEY_MOTION, parser.next().equals("M"));
+        position.set(Position.KEY_MOTION, "M".equals(parser.next()));
 
         return position;
     }

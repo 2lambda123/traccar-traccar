@@ -110,11 +110,11 @@ public class VisiontekProtocolDecoder extends BaseProtocolDecoder {
             position.setAltitude(parser.nextDouble(0));
             position.set(Position.KEY_SATELLITES, parser.nextInt());
             position.set(Position.KEY_ODOMETER, parser.nextInt(0) * 1000);
-            position.set(Position.KEY_IGNITION, parser.next().equals("1"));
+            position.set(Position.KEY_IGNITION, "1".equals(parser.next()));
             position.set(Position.PREFIX_IO + 1, parser.next());
             position.set(Position.PREFIX_IO + 2, parser.next());
             position.set("immobilizer", parser.next());
-            position.set(Position.KEY_CHARGE, parser.next().equals("1"));
+            position.set(Position.KEY_CHARGE, "1".equals(parser.next()));
             position.set(Position.KEY_RSSI, parser.nextDouble());
         }
 
@@ -128,7 +128,7 @@ public class VisiontekProtocolDecoder extends BaseProtocolDecoder {
             position.set(Position.PREFIX_ADC + 2, parser.next());
         }
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         position.set(Position.KEY_DRIVER_UNIQUE_ID, parser.next());
 

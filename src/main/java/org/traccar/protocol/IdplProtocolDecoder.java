@@ -81,7 +81,7 @@ public class IdplProtocolDecoder extends BaseProtocolDecoder {
 
         position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
         position.setLatitude(parser.nextCoordinate(CoordinateFormat.DEG_MIN_MIN_HEM));
         position.setLongitude(parser.nextCoordinate(CoordinateFormat.DEG_MIN_MIN_HEM));
         position.setSpeed(parser.nextDouble(0));
@@ -102,7 +102,7 @@ public class IdplProtocolDecoder extends BaseProtocolDecoder {
         position.set(Position.PREFIX_ADC + 1, parser.nextInt(0));
         position.set(Position.PREFIX_ADC + 2, parser.nextInt(0));
         position.set(Position.KEY_VERSION_FW, parser.next());
-        position.set(Position.KEY_ARCHIVE, parser.next().equals("R"));
+        position.set(Position.KEY_ARCHIVE, "R".equals(parser.next()));
 
         parser.next(); // checksum
 

@@ -390,7 +390,7 @@ public class T800xProtocolDecoder extends BaseProtocolDecoder {
                 int adcCount = type == MSG_GPS_2 || type == MSG_ALARM_2 ? 5 : 2;
                 for (int i = 1; i <= adcCount; i++) {
                     String value = ByteBufUtil.hexDump(buf.readSlice(2));
-                    if (!value.equals("ffff")) {
+                    if (!"ffff".equals(value)) {
                         position.set(Position.PREFIX_ADC + i, Integer.parseInt(value, 16) * 0.01);
                     }
                 }

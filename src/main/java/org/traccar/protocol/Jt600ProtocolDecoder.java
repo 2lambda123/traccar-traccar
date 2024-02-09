@@ -282,7 +282,7 @@ public class Jt600ProtocolDecoder extends BaseProtocolDecoder {
 
         position.setLongitude(parser.nextCoordinate());
         position.setLatitude(parser.nextCoordinate());
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));
 
@@ -340,7 +340,7 @@ public class Jt600ProtocolDecoder extends BaseProtocolDecoder {
 
         position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));
 
-        position.setValid(parser.next().equals("T"));
+        position.setValid("T".equals(parser.next()));
         position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
         position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
 
@@ -359,9 +359,9 @@ public class Jt600ProtocolDecoder extends BaseProtocolDecoder {
         position.set(Position.KEY_INDEX, parser.nextInt(0));
 
         if (channel != null) {
-            if (type.equals("U01") || type.equals("U02") || type.equals("U03")) {
+            if ("U01".equals(type) || "U02".equals(type) || "U03".equals(type)) {
                 channel.writeAndFlush(new NetworkMessage("(S39)", remoteAddress));
-            } else if (type.equals("U06")) {
+            } else if ("U06".equals(type)) {
                 channel.writeAndFlush(new NetworkMessage("(S20)", remoteAddress));
             }
         }
@@ -408,7 +408,7 @@ public class Jt600ProtocolDecoder extends BaseProtocolDecoder {
 
         position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
         position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         position.setSpeed(UnitsConverter.knotsFromMph(parser.nextDouble()));
         position.setCourse(parser.nextDouble());
@@ -416,7 +416,7 @@ public class Jt600ProtocolDecoder extends BaseProtocolDecoder {
         position.set("eventSource", parser.nextInt());
 
         String rfid = parser.next();
-        if (!rfid.equals("0000000000")) {
+        if (!"0000000000".equals(rfid)) {
             position.set(Position.KEY_DRIVER_UNIQUE_ID, rfid);
         }
 

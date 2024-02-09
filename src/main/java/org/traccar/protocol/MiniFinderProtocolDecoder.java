@@ -153,7 +153,7 @@ public class MiniFinderProtocolDecoder extends BaseProtocolDecoder {
         String type = sentence.substring(1, 2);
         position.set(Position.KEY_TYPE, type);
 
-        if (type.equals("3")) {
+        if ("3".equals(type)) {
 
             getLastLocation(position, null);
 
@@ -161,7 +161,7 @@ public class MiniFinderProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("4")) {
+        } else if ("4".equals(type)) {
 
             String[] values = sentence.split(",");
 
@@ -175,7 +175,7 @@ public class MiniFinderProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("5")) {
+        } else if ("5".equals(type)) {
 
             String[] values = sentence.split(",");
 
@@ -188,7 +188,7 @@ public class MiniFinderProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("B") || type.equals("D")) {
+        } else if ("B".equals(type) || "D".equals(type)) {
 
             Parser parser = new Parser(PATTERN_BD, sentence);
             if (!parser.matches()) {
@@ -204,7 +204,7 @@ public class MiniFinderProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("C")) {
+        } else if ("C".equals(type)) {
 
             Parser parser = new Parser(PATTERN_C, sentence);
             if (!parser.matches()) {
@@ -216,7 +216,7 @@ public class MiniFinderProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("A")) {
+        } else if ("A".equals(type)) {
 
             Parser parser = new Parser(PATTERN_A, sentence);
             if (!parser.matches()) {

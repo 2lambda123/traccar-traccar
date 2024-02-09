@@ -169,7 +169,7 @@ public class MeitrackProtocolDecoder extends BaseProtocolDecoder {
 
         position.setTime(parser.nextDateTime());
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         position.set(Position.KEY_SATELLITES, parser.nextInt());
         int rssi = parser.nextInt();

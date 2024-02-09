@@ -92,9 +92,9 @@ public class V680ProtocolDecoder extends BaseProtocolDecoder {
             position.set("lbsData", parser.next());
 
             double lon = parser.nextDouble(0);
-            boolean west = parser.next().equals("W");
+            boolean west = "W".equals(parser.next());
             double lat = parser.nextDouble(0);
-            boolean south = parser.next().equals("S");
+            boolean south = "S".equals(parser.next());
 
             if (lat > 90 || lon > 180) {
                 int lonDegrees = (int) (lon * 0.01);

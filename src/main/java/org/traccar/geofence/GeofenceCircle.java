@@ -75,7 +75,7 @@ public class GeofenceCircle extends GeofenceGeometry {
             throw new ParseException("Mismatch geometry type", 0);
         }
         String content = wkt.substring(wkt.indexOf("(") + 1, wkt.indexOf(")"));
-        if (content.equals("")) {
+        if ("".equals(content)) {
             throw new ParseException("No content", 0);
         }
         String[] commaTokens = content.split(",");

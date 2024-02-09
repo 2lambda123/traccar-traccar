@@ -130,13 +130,13 @@ public class EasyTrackProtocolDecoder extends BaseProtocolDecoder {
         String sentence = (String) msg;
         String type = sentence.substring(20, 22);
 
-        if (channel != null && (type.equals("TX") || type.equals("MQ"))) {
+        if (channel != null && ("TX".equals(type) || "MQ".equals(type))) {
             channel.writeAndFlush(new NetworkMessage(sentence + "#", remoteAddress));
         }
 
-        if (type.equals("OB")) {
+        if ("OB".equals(type)) {
             return decodeObd(channel, remoteAddress, sentence);
-        } else if (type.equals("JZ")) {
+        } else if ("JZ".equals(type)) {
             return decodeCell(channel, remoteAddress, sentence);
         } else {
             return decodeLocation(channel, remoteAddress, sentence);
@@ -160,7 +160,7 @@ public class EasyTrackProtocolDecoder extends BaseProtocolDecoder {
 
         position.set(Position.KEY_COMMAND, parser.next());
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         DateBuilder dateBuilder = new DateBuilder()
                 .setDate(parser.nextHexInt(), parser.nextHexInt(), parser.nextHexInt())

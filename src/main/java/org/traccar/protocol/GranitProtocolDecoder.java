@@ -163,7 +163,7 @@ public class GranitProtocolDecoder extends BaseProtocolDecoder {
         }
         String header = buf.readSlice(HEADER_LENGTH).toString(StandardCharsets.US_ASCII);
 
-        if (header.equals("+RRCB~")) {
+        if ("+RRCB~".equals(header)) {
 
             buf.skipBytes(2); // binary length 26
             int deviceId = buf.readUnsignedShortLE();
@@ -183,7 +183,7 @@ public class GranitProtocolDecoder extends BaseProtocolDecoder {
             decodeStructure(buf, position);
             return position;
 
-        } else if (header.equals("+DDAT~")) {
+        } else if ("+DDAT~".equals(header)) {
 
             buf.skipBytes(2); // binary length
             int deviceId = buf.readUnsignedShortLE();

@@ -70,7 +70,7 @@ public class GnxProtocolDecoder extends BaseProtocolDecoder {
         String type = sentence.substring(5, 8);
 
         Pattern pattern;
-        if (type.equals("MIF")) {
+        if ("MIF".equals(type)) {
             pattern = PATTERN_MIF;
         } else {
             pattern = PATTERN_OTHER;
@@ -101,7 +101,7 @@ public class GnxProtocolDecoder extends BaseProtocolDecoder {
         position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
         position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
 
-        if (type.equals("MIF")) {
+        if ("MIF".equals(type)) {
             position.set(Position.KEY_DRIVER_UNIQUE_ID, parser.next());
         }
 

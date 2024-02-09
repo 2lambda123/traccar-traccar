@@ -106,7 +106,7 @@ public class YwtProtocolDecoder extends BaseProtocolDecoder {
         position.set(Position.KEY_STATUS, parser.next());
 
         // Send response
-        if ((type.equals("KP") || type.equals("EP")) && channel != null) {
+        if (("KP".equals(type) || "EP".equals(type)) && channel != null) {
             channel.writeAndFlush(new NetworkMessage("%AT+" + type + "=" + reportId + "\r\n", remoteAddress));
         }
 

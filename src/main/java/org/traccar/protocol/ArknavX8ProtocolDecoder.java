@@ -98,7 +98,7 @@ public class ArknavX8ProtocolDecoder extends BaseProtocolDecoder {
 
         position.setTime(parser.nextDateTime());
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
         position.setLatitude(parser.nextCoordinate());
         position.setLongitude(parser.nextCoordinate());
         position.setSpeed(parser.nextDouble(0));

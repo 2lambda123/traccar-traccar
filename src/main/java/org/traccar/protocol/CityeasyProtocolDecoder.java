@@ -99,7 +99,7 @@ public class CityeasyProtocolDecoder extends BaseProtocolDecoder {
 
                 position.setTime(parser.nextDateTime());
 
-                position.setValid(parser.next().equals("A"));
+                position.setValid("A".equals(parser.next()));
                 position.set(Position.KEY_SATELLITES, parser.nextInt());
 
                 position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG));

@@ -560,10 +560,10 @@ public class Tk103ProtocolDecoder extends BaseProtocolDecoder {
         if (channel != null) {
             String id = sentence.substring(1, 13);
             String type = sentence.substring(13, 17);
-            if (type.equals("BP00")) {
+            if ("BP00".equals(type)) {
                 channel.writeAndFlush(new NetworkMessage("(" + id + "AP01HSO)", remoteAddress));
                 return null;
-            } else if (type.equals("BP05")) {
+            } else if ("BP05".equals(type)) {
                 channel.writeAndFlush(new NetworkMessage("(" + id + "AP05)", remoteAddress));
             }
         }
@@ -624,7 +624,7 @@ public class Tk103ProtocolDecoder extends BaseProtocolDecoder {
             dateBuilder.setDate(parser.nextInt(0), parser.nextInt(0), parser.nextInt(0));
         }
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
         position.setLatitude(parser.nextCoordinate());
         position.setLongitude(parser.nextCoordinate());
 

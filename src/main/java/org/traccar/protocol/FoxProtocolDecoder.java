@@ -94,7 +94,7 @@ public class FoxProtocolDecoder extends BaseProtocolDecoder {
 
             position.set(Position.KEY_STATUS, parser.nextInt(0));
 
-            position.setValid(parser.next().equals("A"));
+            position.setValid("A".equals(parser.next()));
 
             position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));
             position.setLatitude(parser.nextCoordinate());

@@ -45,7 +45,7 @@ public final class ClassScanner {
         String packagePath = packageName.replace('.', '/');
         URL packageUrl = baseClass.getClassLoader().getResource(packagePath);
 
-        if (packageUrl.getProtocol().equals("jar")) {
+        if ("jar".equals(packageUrl.getProtocol())) {
             String jarFileName = URLDecoder.decode(packageUrl.getFile(), StandardCharsets.UTF_8);
             try (JarFile jf = new JarFile(jarFileName.substring(5, jarFileName.indexOf("!")))) {
                 Enumeration<JarEntry> jarEntries = jf.entries();

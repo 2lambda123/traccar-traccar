@@ -81,7 +81,7 @@ public class M2cProtocolDecoder extends BaseProtocolDecoder {
 
         position.set(Position.KEY_INDEX, parser.nextInt());
 
-        if (parser.next().equals("H")) {
+        if ("H".equals(parser.next())) {
             position.set(Position.KEY_ARCHIVE, true);
         }
 

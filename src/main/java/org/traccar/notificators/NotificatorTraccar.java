@@ -111,8 +111,8 @@ public class NotificatorTraccar implements Notificator {
                     if (!response.getBoolean("success")) {
                         var error = response.getJsonObject("error");
                         String errorCode = error.getString("code");
-                        if (errorCode.equals("messaging/invalid-argument")
-                                || errorCode.equals("messaging/registration-token-not-registered")) {
+                        if ("messaging/invalid-argument".equals(errorCode)
+                                || "messaging/registration-token-not-registered".equals(errorCode)) {
                             failedTokens.add(registrationTokens.get(i));
                         }
                         LOGGER.warn("Push user {} error - {}", user.getId(), error.getString("message"));

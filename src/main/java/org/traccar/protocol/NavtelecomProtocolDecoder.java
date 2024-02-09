@@ -184,7 +184,7 @@ public class NavtelecomProtocolDecoder extends BaseProtocolDecoder {
 
             String type = buf.readCharSequence(2, StandardCharsets.US_ASCII).toString();
 
-            if (type.equals("~A")) {
+            if ("~A".equals(type)) {
 
                 int count = buf.readUnsignedByte();
                 List<Position> positions = new LinkedList<>();

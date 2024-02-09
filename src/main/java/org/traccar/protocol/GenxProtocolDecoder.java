@@ -74,7 +74,7 @@ public class GenxProtocolDecoder extends BaseProtocolDecoder {
                     position.setLongitude(Double.parseDouble(values[i]));
                     break;
                 case 11:
-                    position.set(Position.KEY_IGNITION, values[i].equals("ON"));
+                    position.set(Position.KEY_IGNITION, "ON".equals(values[i]));
                     break;
                 case 13:
                     position.setSpeed(UnitsConverter.knotsFromKph(Integer.parseInt(values[i])));

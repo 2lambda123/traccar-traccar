@@ -299,10 +299,10 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
     private void sendResponse(Channel channel, SocketAddress remoteAddress, String id, String type) {
         if (channel != null && id != null) {
             String response;
-            DateFormat dateFormat = new SimpleDateFormat(type.equals("R12") ? "HHmmss" : "yyyyMMddHHmmss");
+            DateFormat dateFormat = new SimpleDateFormat("R12".equals(type) ? "HHmmss" : "yyyyMMddHHmmss");
             dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             String time = dateFormat.format(new Date());
-            if (type.equals("R12")) {
+            if ("R12".equals(type)) {
                 response = String.format("*HQ,%s,%s,%s#", id, type, time);
             } else {
                 response = String.format("*HQ,%s,V4,%s,%s#", id, type, time);
@@ -331,7 +331,7 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
             position.set(Position.KEY_RESULT, parser.next());
         }
 
-        if (parser.hasNext() && parser.next().equals("V1")) {
+        if (parser.hasNext() && "V1".equals(parser.next())) {
             sendResponse(channel, remoteAddress, id, "V1");
         } else if (getConfig().getBoolean(Keys.PROTOCOL_ACK.withPrefix(getProtocolName()))) {
             sendResponse(channel, remoteAddress, id, "R12");
@@ -343,7 +343,7 @@ public class H02ProtocolDecoder extends BaseProtocolDecoder {
         }
 
         if (parser.hasNext()) {
-            position.setValid(parser.next().equals("A"));
+            position.setValid("A".equals(parser.next()));
         }
         if (parser.hasNext()) {
             parser.nextInt(); // coding scheme
