@@ -65,7 +65,7 @@ public class GotopProtocolDecoder extends BaseProtocolDecoder {
         position.setDeviceId(deviceSession.getDeviceId());
 
         String type = parser.next();
-        if (type.equals("CMD-KEY")) {
+        if ("CMD-KEY".equals(type)) {
             position.set(Position.KEY_ALARM, Position.ALARM_SOS);
         } else if (type.startsWith("ALM-B")) {
             if (Character.getNumericValue(type.charAt(5)) % 2 > 0) {
@@ -75,7 +75,7 @@ public class GotopProtocolDecoder extends BaseProtocolDecoder {
             }
         }
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
 
         position.setTime(parser.nextDateTime());
 

@@ -493,7 +493,7 @@ public class NavisProtocolDecoder extends BaseProtocolDecoder {
     private Object processFlexSingle(
             FlexPositionParser parser, String flexHeader, DeviceSession deviceSession, Channel channel, ByteBuf buf) {
 
-        if (!flexHeader.equals("~C")) {
+        if (!"~C".equals(flexHeader)) {
             buf.readUnsignedInt(); // event index
         }
 
@@ -611,7 +611,7 @@ public class NavisProtocolDecoder extends BaseProtocolDecoder {
         String type = buf.toString(buf.readerIndex(), 3, StandardCharsets.US_ASCII);
         buf.skipBytes(type.length());
 
-        if (type.equals("*>S")) {
+        if ("*>S".equals(type)) {
             return processHandshake(channel, remoteAddress, buf);
         } else {
             DeviceSession deviceSession = getDeviceSession(channel, remoteAddress);

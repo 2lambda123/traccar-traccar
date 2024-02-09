@@ -89,7 +89,7 @@ public class MobilogixProtocolDecoder extends BaseProtocolDecoder {
         if (channel != null) {
             String time = sentence.substring(1, 20);
             String response;
-            if (type.equals("T1")) {
+            if ("T1".equals(type)) {
                 response = String.format("[%s,S1,1]", time);
             } else {
                 response = String.format("[%s,S%s]", time, type.substring(1));

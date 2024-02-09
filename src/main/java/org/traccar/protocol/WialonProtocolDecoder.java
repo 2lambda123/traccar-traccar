@@ -139,15 +139,15 @@ public class WialonProtocolDecoder extends BaseProtocolDecoder {
                     String key = paramParser.group(1).toLowerCase();
                     String value = paramParser.group(2);
                     try {
-                        if (key.equals("accuracy")) {
+                        if ("accuracy".equals(key)) {
                             position.setAccuracy(Double.parseDouble(value));
                         } else {
                             position.set(key, Double.parseDouble(value));
                         }
                     } catch (NumberFormatException e) {
-                        if (value.equalsIgnoreCase("true")) {
+                        if ("true".equalsIgnoreCase(value)) {
                             position.set(key, true);
-                        } else if (value.equalsIgnoreCase("false")) {
+                        } else if ("false".equalsIgnoreCase(value)) {
                             position.set(key, false);
                         } else {
                             position.set(key, value);

@@ -118,7 +118,7 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
 
         position.setTime(parser.nextDateTime(Parser.DateTimeFormat.DMY_HMS));
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
         position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
         position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.DEG_HEM));
         position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble(0)));
@@ -169,7 +169,7 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
                     index += 1; // wifi name
                     String macAddress = values[index++];
                     String rssi = values[index++];
-                    if (!macAddress.isEmpty() && !macAddress.equals("0") && !rssi.isEmpty()) {
+                    if (!macAddress.isEmpty() && !"0".equals(macAddress) && !rssi.isEmpty()) {
                         network.addWifiAccessPoint(WifiAccessPoint.from(macAddress, Integer.parseInt(rssi)));
                     }
                 }
@@ -240,11 +240,11 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
             buf.readerIndex(contentIndex + 1);
         }
 
-        if (type.equals("INIT")) {
+        if ("INIT".equals(type)) {
 
             sendResponse(channel, id, index, "INIT,1");
 
-        } else if (type.equals("LK")) {
+        } else if ("LK".equals(type)) {
 
             sendResponse(channel, id, index, "LK");
 
@@ -276,17 +276,17 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("TKQ") || type.equals("TKQ2")) {
+        } else if ("TKQ".equals(type) || "TKQ2".equals(type)) {
 
             sendResponse(channel, id, index, type);
 
-        } else if (type.equalsIgnoreCase("PULSE")
-                || type.equalsIgnoreCase("HEART")
-                || type.equalsIgnoreCase("BLOOD")
-                || type.equalsIgnoreCase("BPHRT")
-                || type.equalsIgnoreCase("TEMP")
-                || type.equalsIgnoreCase("btemp2")
-                || type.equalsIgnoreCase("oxygen")) {
+        } else if ("PULSE".equalsIgnoreCase(type)
+                || "HEART".equalsIgnoreCase(type)
+                || "BLOOD".equalsIgnoreCase(type)
+                || "BPHRT".equalsIgnoreCase(type)
+                || "TEMP".equalsIgnoreCase(type)
+                || "btemp2".equalsIgnoreCase(type)
+                || "oxygen".equalsIgnoreCase(type)) {
 
             if (buf.isReadable()) {
 
@@ -298,16 +298,16 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
                 String[] values = buf.toString(StandardCharsets.US_ASCII).split(",");
                 int valueIndex = 0;
 
-                if (type.equalsIgnoreCase("TEMP")) {
+                if ("TEMP".equalsIgnoreCase(type)) {
                     position.set(Position.PREFIX_TEMP + 1, Double.parseDouble(values[valueIndex]));
-                } else if (type.equalsIgnoreCase("btemp2")) {
+                } else if ("btemp2".equalsIgnoreCase(type)) {
                     if (Integer.parseInt(values[valueIndex++]) > 0) {
                         position.set(Position.PREFIX_TEMP + 1, Double.parseDouble(values[valueIndex]));
                     }
-                } else if (type.equalsIgnoreCase("oxygen")) {
+                } else if ("oxygen".equalsIgnoreCase(type)) {
                     position.set("bloodOxygen", Integer.parseInt(values[++valueIndex]));
                 } else {
-                    if (type.equalsIgnoreCase("BPHRT") || type.equalsIgnoreCase("BLOOD")) {
+                    if ("BPHRT".equalsIgnoreCase(type) || "BLOOD".equalsIgnoreCase(type)) {
                         position.set("pressureHigh", values[valueIndex++]);
                         position.set("pressureLow", values[valueIndex++]);
                     }
@@ -320,7 +320,7 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
 
             }
 
-        } else if (type.equals("img")) {
+        } else if ("img".equals(type)) {
 
             Position position = new Position(getProtocolName());
             position.setDeviceId(deviceSession.getDeviceId());
@@ -333,7 +333,7 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("JXTK")) {
+        } else if ("JXTK".equals(type)) {
 
             int dataIndex = BufferUtil.indexOf(buf, buf.readerIndex(), buf.writerIndex(), (byte) ',', 4) + 1;
             String[] values = buf.readCharSequence(
@@ -361,7 +361,7 @@ public class WatchProtocolDecoder extends BaseProtocolDecoder {
                 return position;
             }
 
-        } else if (type.equals("TK")) {
+        } else if ("TK".equals(type)) {
 
             if (buf.readableBytes() == 1) {
                 return null;

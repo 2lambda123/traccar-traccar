@@ -53,7 +53,7 @@ public class NavtelecomFrameDecoder extends BaseFrameDecoder {
             String type = buf.getCharSequence(buf.readerIndex(), 2, StandardCharsets.US_ASCII).toString();
             BitSet bits = protocolDecoder.getBits();
 
-            if (type.equals("~A")) {
+            if ("~A".equals(type)) {
                 int count = buf.getUnsignedByte(buf.readerIndex() + 2);
                 int length = 2 + 1 + 1;
 

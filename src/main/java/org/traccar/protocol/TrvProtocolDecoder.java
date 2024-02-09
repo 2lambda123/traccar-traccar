@@ -161,17 +161,17 @@ public class TrvProtocolDecoder extends BaseProtocolDecoder {
 
         if (channel != null) {
             String responseHeader = id + (char) (type.charAt(0) + 1) + type.substring(1);
-            if (type.equals("AP00") && id.equals("IW")) {
+            if ("AP00".equals(type) && "IW".equals(id)) {
                 String time = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
                 channel.writeAndFlush(new NetworkMessage(responseHeader + "," + time + ",0#", remoteAddress));
-            } else if (type.equals("AP14")) {
+            } else if ("AP14".equals(type)) {
                 channel.writeAndFlush(new NetworkMessage(responseHeader + ",0.000,0.000#", remoteAddress));
             } else {
                 channel.writeAndFlush(new NetworkMessage(responseHeader + "#", remoteAddress));
             }
         }
 
-        if (type.equals("AP00")) {
+        if ("AP00".equals(type)) {
             getDeviceSession(channel, remoteAddress, sentence.substring(id.length() + type.length()));
             return null;
         }
@@ -181,7 +181,7 @@ public class TrvProtocolDecoder extends BaseProtocolDecoder {
             return null;
         }
 
-        if (type.equals("CP01")) {
+        if ("CP01".equals(type)) {
 
             Parser parser = new Parser(PATTERN_HEARTBEAT, sentence);
             if (!parser.matches()) {
@@ -203,7 +203,7 @@ public class TrvProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("AP01") || type.equals("AP10") || type.equals("YP03") || type.equals("YP14")) {
+        } else if ("AP01".equals(type) || "AP10".equals(type) || "YP03".equals(type) || "YP14".equals(type)) {
 
             Parser parser = new Parser(PATTERN, sentence);
             if (!parser.matches()) {
@@ -216,7 +216,7 @@ public class TrvProtocolDecoder extends BaseProtocolDecoder {
             DateBuilder dateBuilder = new DateBuilder()
                     .setDate(parser.nextInt(), parser.nextInt(), parser.nextInt());
 
-            position.setValid(parser.next().equals("A"));
+            position.setValid("A".equals(parser.next()));
             position.setLatitude(parser.nextCoordinate());
             position.setLongitude(parser.nextCoordinate());
             position.setSpeed(UnitsConverter.knotsFromKph(parser.nextDouble()));
@@ -241,7 +241,7 @@ public class TrvProtocolDecoder extends BaseProtocolDecoder {
 
             return position;
 
-        } else if (type.equals("AP02")) {
+        } else if ("AP02".equals(type)) {
 
             Parser parser = new Parser(PATTERN_LBS, sentence);
             if (!parser.matches()) {

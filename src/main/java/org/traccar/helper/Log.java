@@ -60,7 +60,7 @@ public final class Log {
         RollingFileHandler(String name, boolean rotate, String rotateInterval) {
             this.name = name;
             this.rotate = rotate;
-            this.template = rotateInterval.equalsIgnoreCase("HOUR") ? "yyyyMMddHH" : "yyyyMMdd";
+            this.template = "HOUR".equalsIgnoreCase(rotateInterval) ? "yyyyMMddHH" : "yyyyMMdd";
         }
 
         @Override

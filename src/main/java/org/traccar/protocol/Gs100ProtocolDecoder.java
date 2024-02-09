@@ -48,7 +48,7 @@ public class Gs100ProtocolDecoder extends BaseProtocolDecoder {
 
         String header = buf.readCharSequence(2, StandardCharsets.US_ASCII).toString();
 
-        if (header.equals("GL")) {
+        if ("GL".equals(header)) {
 
             buf.skipBytes(1);
             String imei = buf.readCharSequence(buf.readUnsignedByte(), StandardCharsets.US_ASCII).toString();

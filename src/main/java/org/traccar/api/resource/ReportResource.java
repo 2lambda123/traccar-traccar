@@ -150,7 +150,7 @@ public class ReportResource extends SimpleObjectResource<Report> {
             @QueryParam("from") Date from,
             @QueryParam("to") Date to,
             @PathParam("type") String type) throws StorageException {
-        return getRouteExcel(deviceIds, groupIds, from, to, type.equals("mail"));
+        return getRouteExcel(deviceIds, groupIds, from, to, "mail".equals(type));
     }
 
     @Path("events")
@@ -193,7 +193,7 @@ public class ReportResource extends SimpleObjectResource<Report> {
             @QueryParam("from") Date from,
             @QueryParam("to") Date to,
             @PathParam("type") String type) throws StorageException {
-        return getEventsExcel(deviceIds, groupIds, types, from, to, type.equals("mail"));
+        return getEventsExcel(deviceIds, groupIds, types, from, to, "mail".equals(type));
     }
 
     @Path("summary")
@@ -236,7 +236,7 @@ public class ReportResource extends SimpleObjectResource<Report> {
             @QueryParam("to") Date to,
             @QueryParam("daily") boolean daily,
             @PathParam("type") String type) throws StorageException {
-        return getSummaryExcel(deviceIds, groupIds, from, to, daily, type.equals("mail"));
+        return getSummaryExcel(deviceIds, groupIds, from, to, daily, "mail".equals(type));
     }
 
     @Path("trips")
@@ -276,7 +276,7 @@ public class ReportResource extends SimpleObjectResource<Report> {
             @QueryParam("from") Date from,
             @QueryParam("to") Date to,
             @PathParam("type") String type) throws StorageException {
-        return getTripsExcel(deviceIds, groupIds, from, to, type.equals("mail"));
+        return getTripsExcel(deviceIds, groupIds, from, to, "mail".equals(type));
     }
 
     @Path("stops")
@@ -316,7 +316,7 @@ public class ReportResource extends SimpleObjectResource<Report> {
             @QueryParam("from") Date from,
             @QueryParam("to") Date to,
             @PathParam("type") String type) throws StorageException {
-        return getStopsExcel(deviceIds, groupIds, from, to, type.equals("mail"));
+        return getStopsExcel(deviceIds, groupIds, from, to, "mail".equals(type));
     }
 
 }

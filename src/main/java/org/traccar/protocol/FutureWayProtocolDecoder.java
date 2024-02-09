@@ -93,7 +93,7 @@ public class FutureWayProtocolDecoder extends BaseProtocolDecoder {
                         return null;
                     }
 
-                    position.setValid(parser.next().equals("A"));
+                    position.setValid("A".equals(parser.next()));
                     position.setTime(parser.nextDateTime());
 
                     if (parser.hasNext(6)) {

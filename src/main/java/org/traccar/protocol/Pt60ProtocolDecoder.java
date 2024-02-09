@@ -64,7 +64,7 @@ public class Pt60ProtocolDecoder extends BaseProtocolDecoder {
         if (channel != null) {
             String message;
             String time = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-            if (format.equals("G")) {
+            if ("G".equals(format)) {
                 message = String.format("@G#@,V01,38,%s,@R#@", time);
             } else {
                 message = String.format("@B#@|01|%03d|%s|0|%s|@E#@", type + 1, imei, time);
@@ -93,7 +93,7 @@ public class Pt60ProtocolDecoder extends BaseProtocolDecoder {
 
         sendResponse(channel, remoteAddress, format, type, imei);
 
-        if (format.equals("G")) {
+        if ("G".equals(format)) {
 
             if (type != MSG_G_TRACK && type != MSG_G_STEP_COUNT && type != MSG_G_HEART_RATE) {
                 return null;

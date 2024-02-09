@@ -92,9 +92,9 @@ public class MemoryStorage extends Storage {
         } else if (genericCondition instanceof Condition.Binary) {
 
             var condition = (Condition.Binary) genericCondition;
-            if (condition.getOperator().equals("AND")) {
+            if ("AND".equals(condition.getOperator())) {
                 return checkCondition(condition.getFirst(), object) && checkCondition(condition.getSecond(), object);
-            } else if (condition.getOperator().equals("OR")) {
+            } else if ("OR".equals(condition.getOperator())) {
                 return checkCondition(condition.getFirst(), object) || checkCondition(condition.getSecond(), object);
             }
 

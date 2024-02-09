@@ -33,10 +33,10 @@ public abstract class Columns {
         List<String> columns = new LinkedList<>();
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
-            int parameterCount = type.equals("set") ? 1 : 0;
+            int parameterCount = "set".equals(type) ? 1 : 0;
             if (method.getName().startsWith(type) && method.getParameterTypes().length == parameterCount
                     && !method.isAnnotationPresent(QueryIgnore.class)
-                    && !method.getName().equals("getClass")) {
+                    && !"getClass".equals(method.getName())) {
                 columns.add(Introspector.decapitalize(method.getName().substring(3)));
             }
         }

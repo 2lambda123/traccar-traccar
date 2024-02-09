@@ -190,22 +190,22 @@ public class Gps103ProtocolDecoder extends BaseProtocolDecoder {
 
         String alarm = parser.next();
         position.set(Position.KEY_ALARM, decodeAlarm(alarm));
-        if (alarm.equals("help me")) {
+        if ("help me".equals(alarm)) {
             if (channel != null) {
                 channel.writeAndFlush(new NetworkMessage("**,imei:" + imei + ",E;", remoteAddress));
             }
         } else if (alarm.startsWith("vt")) {
             photoPackets = Integer.parseInt(alarm.substring(2));
             photo = Unpooled.buffer();
-        } else if (alarm.equals("acc on")) {
+        } else if ("acc on".equals(alarm)) {
             position.set(Position.KEY_IGNITION, true);
-        } else if (alarm.equals("acc off")) {
+        } else if ("acc off".equals(alarm)) {
             position.set(Position.KEY_IGNITION, false);
         } else if (alarm.startsWith("T:")) {
             position.set(Position.PREFIX_TEMP + 1, Double.parseDouble(alarm.substring(2)));
         } else if (alarm.startsWith("oil ")) {
             position.set(Position.KEY_FUEL_LEVEL, Double.parseDouble(alarm.substring(4)));
-        } else if (!position.hasAttribute(Position.KEY_ALARM) && !alarm.equals("tracker")) {
+        } else if (!position.hasAttribute(Position.KEY_ALARM) && !"tracker".equals(alarm)) {
             position.set(Position.KEY_EVENT, alarm);
         }
 
@@ -216,7 +216,7 @@ public class Gps103ProtocolDecoder extends BaseProtocolDecoder {
         int localMinutes = parser.nextInt(0);
 
         String rfid = parser.next();
-        if (alarm.equals("rfid")) {
+        if ("rfid".equals(alarm)) {
             position.set(Position.KEY_DRIVER_UNIQUE_ID, rfid);
         }
 
@@ -245,7 +245,7 @@ public class Gps103ProtocolDecoder extends BaseProtocolDecoder {
             }
             position.setTime(dateBuilder.getDate());
 
-            position.setValid(parser.next().equals("A"));
+            position.setValid("A".equals(parser.next()));
             position.setFixTime(position.getDeviceTime());
             position.setLatitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG_MIN_HEM));
             position.setLongitude(parser.nextCoordinate(Parser.CoordinateFormat.HEM_DEG_MIN_HEM));

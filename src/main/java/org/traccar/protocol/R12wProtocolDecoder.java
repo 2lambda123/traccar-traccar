@@ -52,7 +52,7 @@ public class R12wProtocolDecoder extends BaseProtocolDecoder {
             return null;
         }
 
-        if (type.equals("0001")) {
+        if ("0001".equals(type)) {
             sendResponse(channel, "1001", id, values[3] + ",OK");
         }
 

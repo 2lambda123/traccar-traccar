@@ -117,7 +117,7 @@ public class UproProtocolDecoder extends BaseProtocolDecoder {
         }
 
         String head = parser.next();
-        boolean reply = parser.next().equals("1");
+        boolean reply = "1".equals(parser.next());
 
         DeviceSession deviceSession = getDeviceSession(channel, remoteAddress, parser.next());
         if (deviceSession == null) {

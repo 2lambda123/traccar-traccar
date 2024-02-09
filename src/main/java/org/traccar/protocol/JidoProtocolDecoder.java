@@ -96,7 +96,7 @@ public class JidoProtocolDecoder extends BaseProtocolDecoder {
         position.set(Position.KEY_ALARM, decodeAlarm(parser.nextInt()));
 
         if (parser.hasNext()) {
-            position.setValid(parser.next().equals("A"));
+            position.setValid("A".equals(parser.next()));
         } else {
             position.setValid(true);
         }

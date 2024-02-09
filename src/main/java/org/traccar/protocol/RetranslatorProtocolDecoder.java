@@ -71,7 +71,7 @@ public class RetranslatorProtocolDecoder extends BaseProtocolDecoder {
             String name = buf.readCharSequence(nameLength, StandardCharsets.US_ASCII).toString();
             buf.readByte();
 
-            if (name.equals("posinfo")) {
+            if ("posinfo".equals(name)) {
                 position.setValid(true);
                 position.setLongitude(buf.readDoubleLE());
                 position.setLatitude(buf.readDoubleLE());

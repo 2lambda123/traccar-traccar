@@ -308,7 +308,7 @@ public class DatabaseStorage extends Storage {
                 result.append(" DESC");
             }
             if (order.getLimit() > 0) {
-                if (databaseType.equals("Microsoft SQL Server")) {
+                if ("Microsoft SQL Server".equals(databaseType)) {
                     result.append(" OFFSET 0 ROWS FETCH FIRST ");
                     result.append(order.getLimit());
                     result.append(" ROWS ONLY");
@@ -360,7 +360,7 @@ public class DatabaseStorage extends Storage {
 
             result.append("SELECT DISTINCT ");
             if (!expandDevices) {
-                if (outputKey.equals("groupId")) {
+                if ("groupId".equals(outputKey)) {
                     result.append("all_groups.");
                 } else {
                     result.append(groupStorageName).append('.');

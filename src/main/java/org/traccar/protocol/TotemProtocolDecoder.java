@@ -298,7 +298,7 @@ public class TotemProtocolDecoder extends BaseProtocolDecoder {
         }
         dateBuilder.setTime(parser.nextInt(0), parser.nextInt(0), parser.nextInt(0));
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
         position.setLatitude(parser.nextCoordinate());
         position.setLongitude(parser.nextCoordinate());
         position.setSpeed(parser.nextDouble(0));
@@ -393,7 +393,7 @@ public class TotemProtocolDecoder extends BaseProtocolDecoder {
         position.setNetwork(new Network(
                 CellTower.fromLacCid(getConfig(), parser.nextHexInt(0), parser.nextHexInt(0))));
 
-        position.setValid(parser.next().equals("A"));
+        position.setValid("A".equals(parser.next()));
         position.set(Position.KEY_SATELLITES, parser.nextInt());
         position.setCourse(parser.nextDouble(0));
         position.setSpeed(parser.nextDouble(0));

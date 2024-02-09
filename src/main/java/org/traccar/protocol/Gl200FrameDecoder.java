@@ -35,7 +35,7 @@ public class Gl200FrameDecoder extends BaseFrameDecoder {
 
     public static boolean isBinary(ByteBuf buf) {
         String header = buf.toString(buf.readerIndex(), 4, StandardCharsets.US_ASCII);
-        if (header.equals("+ACK")) {
+        if ("+ACK".equals(header)) {
             return buf.getByte(buf.readerIndex() + header.length()) != (byte) ':';
         } else {
             return BINARY_HEADERS.contains(header);

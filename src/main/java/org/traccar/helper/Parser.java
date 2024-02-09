@@ -233,7 +233,7 @@ public class Parser {
                 break;
         }
 
-        if (hemisphere != null && (hemisphere.equals("S") || hemisphere.equals("W") || hemisphere.equals("-"))) {
+        if (hemisphere != null && ("S".equals(hemisphere) || "W".equals(hemisphere) || "-".equals(hemisphere))) {
             coordinate = -Math.abs(coordinate);
         }
 
